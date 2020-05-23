@@ -10,19 +10,24 @@ app.get('/', (req, res) => {
 	res.send("It works");
 });
 
+const RUN_LINK = "https://api.hackerearth.com/v3/code/run/";
+
 app.post('/run', async (req, res) => {
 	let options = {
 		"client_secret": process.env.HACKEREARTH_SECRET,
 		"source": req.body.code,
-		"lang": "JAVASCRIPT",
-		"time_limit": 5,
-		"memory_limit": 2**16
+		"lang": "JAVASCRIPT"
 	};
   try {
-    const {run_status: {output}, errors} = await axios.post("http://api.hackerearth.com/code/run/", options);
-    res.json({"output": output, "errors": errors});
+    const response = await axios.post(RUN_LINK, options);
+    const {message, errors, run_status: {output}} = response;
+		const result = {"output": output, "message": message, "errors": errors};
+		console.log(result);
+    res.send(result);
   } catch (error) {
-    res.json({"error": error});
+		const result = {"error": error};
+		console.log(result);
+    res.send(result);
   }
 });
 
