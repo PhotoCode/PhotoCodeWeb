@@ -19,8 +19,8 @@ app.post('/run', async (req, res) => {
 		"memory_limit": 2**16
 	};
   try {
-    const response = await axios.post("http://api.hackerearth.com/code/run/", options);
-    res.json({"output": response.run_status.output, "errors": response.errors});
+    const {run_status: {output}, errors} = await axios.post("http://api.hackerearth.com/code/run/", options);
+    res.json({"output": output, "errors": errors});
   } catch (error) {
     res.json({"error": error});
   }
