@@ -32,7 +32,7 @@ app.post('/scan', upload.single('image'), async (req, res) => {
 	const [result] = await client.documentTextDetection(req.file);
 	const fullTextAnnotation = result.fullTextAnnotation;
 
-	res.send(fullTextAnnotation.text);
+	res.json({text: fullTextAnnotation.text});
 });
 
 app.listen(process.env.PORT || 3000, _ => console.log("App started"));
