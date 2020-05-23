@@ -3,7 +3,6 @@ const multer  = require('multer');
 const upload = multer();
 const vision = require('@google-cloud/vision');
 const axios = require('axios');
-const client = new vision.ImageAnnotatorClient();
 
 const app = express();
 const client = new vision.ImageAnnotatorClient();
