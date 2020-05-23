@@ -15,7 +15,7 @@ app.post('/run', (req, res) => {
 
 });
 
-app.post('/scan', (req, res) => {
+app.post('/scan', async (req, res) => {
 	const [result] = await client.documentTextDetection(req.body.image);
 	const fullTextAnnotation = result.fullTextAnnotation;
 	
