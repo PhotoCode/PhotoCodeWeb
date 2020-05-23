@@ -7,7 +7,8 @@
 	},
 	"dependencies": {
 		"express": "4.17.1",
-		"@google-cloud/vision": "1.11.0"
+		"@google-cloud/vision": "1.11.0",
+		"axios": "^0.19.2"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.4"
