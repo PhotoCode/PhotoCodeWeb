@@ -2,3 +2,4 @@ node_modules/
 run.bat
 test.js
 service-account-file.json
+logs.txt
