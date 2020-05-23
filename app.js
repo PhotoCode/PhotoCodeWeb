@@ -1,6 +1,9 @@
 const express = require('express');
+const multer  = require('multer');
+const upload = multer();
 const vision = require('@google-cloud/vision');
 const axios = require('axios');
+const client = new vision.ImageAnnotatorClient();
 
 const app = express();
 const client = new vision.ImageAnnotatorClient();
@@ -23,11 +26,11 @@ app.post('/run', async (req, res) => {
     const {message, errors, run_status: {output}} = response;
 		const result = {"output": output, "message": message, "errors": errors};
 		console.log(result);
-    res.send(result);
+    res.json(result);
   } catch (error) {
 		const result = {"error": error};
 		console.log(result);
-    res.send(result);
+    res.json(result);
   }
 });
 
