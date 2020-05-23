@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.post('/run', async (req, res) => {
 	const config = {
-		"config_secret": process.env.HACKEREARTH_SECRET,
+		"client_secret": process.env.HACKEREARTH_SECRET,
 		"source": req.body.code,
 		"lang": "JAVASCRIPT"
 	};
@@ -27,7 +27,7 @@ app.post('/run', async (req, res) => {
     res.json(result);
   } catch (error) {
 		console.log(error);
-		const result = {"errors": {[error.message]: error}};
+		const result = {"errors": {[response.data.message]: error}};
     res.json(result);
   }
 });
