@@ -10,7 +10,7 @@ const client = new vision.ImageAnnotatorClient();
 app.use(express.json());
 
 app.get('/', (req, res) => {
-	res.send("It works");
+	res.send(__dirname);
 });
 
 const RUN_LINK = "https://api.hackerearth.com/v3/code/run/";
