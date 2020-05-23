@@ -24,11 +24,10 @@ app.post('/run', async (req, res) => {
     const response = await axios.post(HACKEREARTH_RUN, config);
     const {message, errors, run_status: {output}} = response;
 		const result = {"output": output, "message": message, "errors": errors};
-		console.log(result);
     res.json(result);
   } catch (error) {
+		console.log(error);
 		const result = {"errors": {[error.message]: error}};
-		console.log(result);
     res.json(result);
   }
 });
