@@ -36,7 +36,7 @@ app.post('/scan', upload.single('image'), async (req, res) => {
 	client.documentTextDetection(req.file)
 		.then( result => {
 			res.json({text: result.fullTextAnnotation.text});
-		} .catch(err => console.log(err));
+		}) .catch(err => console.log(err));
 });
 
 app.listen(process.env.PORT || 3000, _ => console.log("App started"));
