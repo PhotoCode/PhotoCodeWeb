@@ -1,11 +1,12 @@
 const express = require('express');
 const multer  = require('multer');
-const upload = multer();
 const vision = require('@google-cloud/vision');
 const axios = require('axios');
 
+const upload = multer();
 const app = express();
 const client = new vision.ImageAnnotatorClient();
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -33,8 +34,9 @@ app.post('/run', async (req, res) => {
   }
 });
 
-app.post('/scan', async (req, res) => {
-	const [result] = await client.documentTextDetection(req.body.image);
+app.post('/scan', upload.single('image'), async (req, res) => {
+	const [result] = await client.documentTextDetection(req.file);
+
 	const fullTextAnnotation = result.fullTextAnnotation;
 
 	res.json({text: fullTextAnnotation.text});
