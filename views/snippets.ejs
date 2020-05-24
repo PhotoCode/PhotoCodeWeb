@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="has-background-white">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <body>
   <section class="section">
     <div class="container">
-      <h1 class="title">
+      <h1 class="title is-1 has-text-danger">
         My Code Snippets
       </h1>
 	  <% if (snippets.length === 0) { %>
@@ -25,16 +25,18 @@
 	<div class="tile is-vertical is-parent">
 		<% let i;
 		   for (i=0; i<Math.ceil(snippets.length/2); ++i) { %>
-			<div class="title is-child box">
+			<div class="title is-child box has-background-success">
         		<img class="image" src="<%= snippets[i].imageURL %>" />
+				<br>
 				<pre class="is-family-code"><%= snippets[i].code.trim() %></pre>
 			</div>
 		<% } %>
 	</div>
 	<div class="tile is-vertical is-parent">
 		<% for (; i<snippets.length; ++i) { %>
-			<div class="title is-child box">
+			<div class="title is-child box has-background-success">
         		<img class="image" src="<%= snippets[i].imageURL %>" />
+				<br>
 				<pre class="is-family-code"><%= snippets[i].code.trim() %></pre>
 			</div>
 		<% } %>
