@@ -69,7 +69,7 @@ app.post("/run", async (req, res) => {
 });
 
 app.get("/snippets", (req, res) => {
-	res.render("snippets.ejs", {snippets});
+	res.json({data: snippets});
 });
 
 // scan, upload, add to snippets, and return image info
@@ -104,6 +104,10 @@ async function scanImage(buffer) {
   const [result] = await client.textDetection(buffer);
 	return result.fullTextAnnotation.text;
 }
+
+app.get("/app/snippets", (req, res) => {
+	res.render("snippets.ejs", {snippets});
+});
 
 // start it up :D
 app.listen(process.env.PORT || 3000, _ => console.log("App started"));
