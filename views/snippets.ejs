@@ -9,7 +9,7 @@
 	<body>
     <h1>Snippets</h1>
 		<div class="snippets">
-      <% if (!snippets.length) { %>
+      <% if (snippets.length === 0) { %>
         <p class="empty"><em>No snippets currently...</em></p>
       <% } %>
 			<% for (let {imageURL, code} of snippets) { %>
