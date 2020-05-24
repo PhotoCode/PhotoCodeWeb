@@ -1,9 +1,12 @@
+require('dotenv').config();
 const express = require("express");
 const multer = require("multer");
 const vision = require("@google-cloud/vision");
 const axios = require("axios");
 const path = require("path");
 const qs = require("querystring");
+const mongoose = require("mongoose");
+const to = require("await-to-js").default;
 
 if (!(process.env.NODE_ENV === 'production')) {
 	const result = require('dotenv').config();
@@ -23,10 +26,11 @@ IMGBB_SECRET: secret key for image api
 const app = express();
 const upload = multer();
 const snippets = [];
+mongoose.connect(`mongodb+srv://paranoia:${process.env.DB_PASS}@userinexperience-maztg.mongodb.net/test`);
 
 // google cloud setup
-const options = JSON.parse(process.env.GOOGLE_SECRET);
-const client = new vision.ImageAnnotatorClient(options);
+// const options = JSON.parse(process.env.GOOGLE_SECRET);
+// const client = new vision.ImageAnnotatorClient(options);
 
 // constants
 const HACKEREARTH_RUN = "https://api.hackerearth.com/v3/code/run/";
@@ -114,6 +118,26 @@ async function scanImage(buffer) {
 
 app.get("/app/snippets", (req, res) => {
 	res.render("snippets.ejs", {snippets});
+});
+
+const SnippetSchema = mongoose.Schema({
+	name: String,
+	code: String,
+	imageURL: String,
+});
+
+const Snippet = mongoose.model('Snippet', SnippetSchema);
+
+app.post('/snippets', async (req, res) => {
+	const [err, snippet] = await to(Snippet.create(req.body));
+	if (err) return res.status(400).json({ error: err });
+	return res.json({ data: snippet });
+});
+
+app.get('/snippets', async (req, res) => {
+	const [err, snippets] = await to(Snippet.find({}).exec());
+	if (err) return res.status(400).json({error: err});
+	return res.json({ data: snippets });
 });
 
 // start it up :D
