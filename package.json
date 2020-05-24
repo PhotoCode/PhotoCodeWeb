@@ -18,6 +18,8 @@
 		"qs": "^6.9.4"
 	},
 	"devDependencies": {
-		"nodemon": "^2.0.4"
+		"nodemon": "^2.0.4",
+		"dotenv": "8.2.0",
+		"package.json": "^2.0.1"
 	}
 }

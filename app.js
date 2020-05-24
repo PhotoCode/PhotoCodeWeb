@@ -8,6 +8,13 @@ const qs = require("querystring");
 const mongoose = require("mongoose");
 const to = require("await-to-js").default;
 
+if (!process.env.NODE_ENV === 'production') {
+	const result = require('dotenv').config();
+	if (result.error) {
+	  throw result.error
+	}
+}
+
 /*
 ENVIRONMENT VARIABLES
 GOOGLE_SECRET: json of options (has secret key) # https://googleapis.dev/nodejs/vision/latest/v1.ImageAnnotatorClient.html#ImageAnnotatorClient
