@@ -5,10 +5,11 @@ const axios = require("axios");
 const path = require("path");
 const qs = require("querystring");
 
-const result = require('dotenv').config();
-
-if (result.error) {
-  throw result.error
+if (!process.env.NODE_ENV === 'production') {
+	const result = require('dotenv').config();
+	if (result.error) {
+	  throw result.error
+	}
 }
 
 /*
