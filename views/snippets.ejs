@@ -9,6 +9,9 @@
 	<body>
     <h1>Snippets</h1>
 		<div class="snippets">
+      <% if (!snippets) { %>
+        <p class="empty"><em>No snippets currently...</em></p>
+      <% } %>
 			<% for (let {imageURL, code} of snippets) { %>
 				<div class="pair">
           <img class="image" src="<%= imageURL %>" />
