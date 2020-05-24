@@ -58,7 +58,12 @@ app.post("/run", async (req, res) => {
 
 app.post("/scan", upload.single("image"), (req, res) => {
   res.json({
-    data: "function add(a, b) {\nreturn a+b;}\n\nconsole.log(add(1, 2);"
+    data: `
+function add(a, b) {
+	return a+b;
+}
+console.log(add(1, 2));
+`
   });
   /*
   client
