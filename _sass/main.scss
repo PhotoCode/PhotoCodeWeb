@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+
+$lime: #0DD47F;
+$dark: #21262C;
+$family-sans-serif: "Helvetica", "Arial", sans-serif;
+$primary: $dark;
+$primary: $white;
+
+@import "../node_modules/bulma/bulma";

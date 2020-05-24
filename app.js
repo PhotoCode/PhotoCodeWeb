@@ -68,6 +68,7 @@ app.post("/run", async (req, res) => {
   }
 });
 
+// get snippets
 app.get("/snippets", (req, res) => {
 	res.json({data: snippets});
 });
@@ -80,7 +81,7 @@ app.post("/scan", upload.single("image"), async (req, res) => {
 		const imageURL = await uploadImage(buffer);
 		const code = await scanImage(buffer);
 		const pair = {imageURL, code};
-		snippets.push(pair);
+		snippets.push(pair);  // add to snippets
 		return res.json(pair);
 	} catch (error) {
 		if (error.response) return res.json(error.response.data);
@@ -105,6 +106,7 @@ async function scanImage(buffer) {
 	return result.fullTextAnnotation.text;
 }
 
+// webapp
 app.get("/app/snippets", (req, res) => {
 	res.render("snippets.ejs", {snippets});
 });

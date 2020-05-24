@@ -1,12 +1,5 @@
 html {
-	width: 100%;
-	font-family: sans-serif;
-	background-color: dimgray;
-}
-
-h1, p {
-	color: lightgray;
-	margin-left: 1em;
+	background-color: #21262C;
 }
 
 .pair {
@@ -22,7 +15,8 @@ h1, p {
 	border: 2px;
 	border-color: dimgray;
 	border-style: solid;
-	object-fit: contain;
+	-o-object-fit: contain;
+	   object-fit: contain;
 }
 
 .code {
@@ -32,3 +26,5 @@ h1, p {
 	border-left-color: dimgray;
 	border-left-style: solid;
 }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNuaXBwZXRzLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtDQUNDLHlCQUF5QjtBQUMxQjs7QUFFQTtDQUNDLFlBQVk7Q0FDWixzQkFBc0I7Q0FDdEIsYUFBYTtDQUNiLHNCQUFzQjtBQUN2Qjs7QUFFQTtDQUNDLGNBQWM7Q0FDZCxnQkFBZ0I7Q0FDaEIsV0FBVztDQUNYLHFCQUFxQjtDQUNyQixtQkFBbUI7Q0FDbkIsc0JBQW1CO0lBQW5CLG1CQUFtQjtBQUNwQjs7QUFFQTtDQUNDLGdCQUFnQjtDQUNoQixpQkFBaUI7Q0FDakIsZ0JBQWdCO0NBQ2hCLDBCQUEwQjtDQUMxQix3QkFBd0I7QUFDekIiLCJmaWxlIjoic25pcHBldHMuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbCB7XHJcblx0YmFja2dyb3VuZC1jb2xvcjogIzIxMjYyQztcclxufVxyXG5cclxuLnBhaXIge1xyXG5cdHBhZGRpbmc6IDFlbTtcclxuXHRwYWRkaW5nLWJvdHRvbTogMC4wMWVtO1xyXG5cdG1hcmdpbjogMWVtIDA7XHJcblx0YmFja2dyb3VuZC1jb2xvcjogZ3JheTtcclxufVxyXG5cclxuLmltYWdlIHtcclxuXHRtYXgtd2lkdGg6IDgwJTtcclxuXHRtYXgtaGVpZ2h0OiAxMGVtO1xyXG5cdGJvcmRlcjogMnB4O1xyXG5cdGJvcmRlci1jb2xvcjogZGltZ3JheTtcclxuXHRib3JkZXItc3R5bGU6IHNvbGlkO1xyXG5cdG9iamVjdC1maXQ6IGNvbnRhaW47XHJcbn1cclxuXHJcbi5jb2RlIHtcclxuXHRjb2xvcjogbGlnaHRncmF5O1xyXG5cdHBhZGRpbmctbGVmdDogMWVtO1xyXG5cdGJvcmRlci1sZWZ0OiAycHg7XHJcblx0Ym9yZGVyLWxlZnQtY29sb3I6IGRpbWdyYXk7XHJcblx0Ym9yZGVyLWxlZnQtc3R5bGU6IHNvbGlkO1xyXG59XHJcbiJdfQ== */
