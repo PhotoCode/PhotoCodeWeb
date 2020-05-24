@@ -1,6 +1,7 @@
 {
 	"name": "PhotoCodeWeb",
 	"version": "1.0.0",
+  "license": "MIT",
 	"scripts": {
 		"dev": "nodemon app.js",
 		"start": "node app.js"
