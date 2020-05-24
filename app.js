@@ -33,8 +33,9 @@ app.post('/run', async (req, res) => {
 	}
 });
 
-app.post('/scan', upload.single('image'), async (req, res) => {
-	client.documentTextDetection(req.file)
+app.post('/scan', upload.single('image'), (req, res) => {
+	const encoded = req.file.buffer.toString('base64')
+	client.documentTextDetection(encoded)
 		.then( result => {
 			res.json({text: result.fullTextAnnotation.text});
 		}) .catch(err => console.log(err));
