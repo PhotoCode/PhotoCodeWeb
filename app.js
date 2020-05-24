@@ -5,6 +5,12 @@ const axios = require("axios");
 const path = require("path");
 const qs = require("querystring");
 
+const result = require('dotenv').config();
+
+if (result.error) {
+  throw result.error
+}
+
 /*
 ENVIRONMENT VARIABLES
 GOOGLE_SECRET: json of options (has secret key) # https://googleapis.dev/nodejs/vision/latest/v1.ImageAnnotatorClient.html#ImageAnnotatorClient
@@ -17,6 +23,7 @@ const app = express();
 const upload = multer();
 const snippets = [];
 
+console.log("it's: " + process.env);
 // google cloud setup
 const options = JSON.parse(process.env.GOOGLE_SECRET);
 const client = new vision.ImageAnnotatorClient(options);

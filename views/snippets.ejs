@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>My Code Snippets</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
@@ -11,7 +11,7 @@
   <section class="section">
     <div class="container">
       <h1 class="title">
-        My Snippets
+        My Code Snippets
       </h1>
 	  <% if (snippets.length === 0) { %>
       <p class="subtitle">
@@ -21,39 +21,23 @@
     </div>
   </section>
   <div class="tile is-ancestor">
-  	<div class="tile">
-  	  Snippet 1
-  	</div>
-  	<div class="tile">
-  	  Snippet 2
-  	</div>
-  </div>
+
+	<div class="tile is-vertical is-parent">
+		<% let i;
+		   for (i=0; i<Math.ceil(snippets.length/2); ++i) { %>
+			<div class="title is-child box">
+        		<img class="image" src="<%= snippets[i].imageURL %>" />
+				<pre class="is-family-code"><%= snippets[i].code.trim() %></pre>
+			</div>
+		<% } %>
+	</div>
+	<div class="tile is-vertical is-parent">
+		<% for (; i<snippets.length; ++i) { %>
+			<div class="title is-child box">
+        		<img class="image" src="<%= snippets[i].imageURL %>" />
+				<pre class="is-family-code"><%= snippets[i].code.trim() %></pre>
+			</div>
+		<% } %>
+	 </div>
   </body>
 </html>
-
-<!--
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <title>Snippets</title>
-    <link rel="stylesheet" href="snippets.css" />
-  </head>
-
-	<body>
-    <h1>Snippets</h1>
-		<div class="snippets">
-      <% if (snippets.length === 0) { %>
-        <p class="empty"><em>No snippets currently...</em></p>
-      <% } %>
-			<% for (let {imageURL, code} of snippets) { %>
-				<div class="pair">
-          <img class="image" src="<%= imageURL %>" />
-					<pre class="code"><%= code.trim() %></pre>
-				</div>
-			<% } %>
-		</div>
-	</body>
-
-</html>
--->
