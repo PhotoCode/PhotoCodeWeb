@@ -7,6 +7,7 @@ const upload = multer();
 const app = express();
 const client = new vision.ImageAnnotatorClient();
 const HACKEREARTH_RUN = "https://api.hackerearth.com/v3/code/run/";
+const HACKEREARTH_SECRET = process.env.HACKEREARTH_SECRET;
 
 app.use(express.json());
 
@@ -15,21 +16,25 @@ app.get('/', (req, res) => {
 });
 
 app.post('/run', async (req, res) => {
-	const config = {
-		"client_secret": process.env.HACKEREARTH_SECRET,
-		"source": req.body.code,
-		"lang": "JAVASCRIPT"
+	console.log("Code:", req.body.code);
+	const data = {
+		client_secret: HACKEREARTH_SECRET,
+		source: req.body.code,
+		lang: "JAVASCRIPT"
 	};
+
 	try {
-		const response = await axios.post(HACKEREARTH_RUN, config);
+		const response = await axios.post(HACKEREARTH_RUN, data);
 		if (response.message == "OK")
 			result.output = response.run_status.output;
-		res.json(result);
-	} catch (error) {
+		return res.json(result);
+	}
+
+	catch (error) {
+		console.log("Error:", error.message);
 		if (error.response)
-			res.json(error.response.data);
-		console.log("Error", error.message);
-		res.json(error);
+			return res.json(error.response.data);
+		return res.json(error);
 	}
 });
 
