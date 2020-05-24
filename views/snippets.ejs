@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Snippets</title>
+    <link rel="stylesheet" href="snippets.css" />
+  </head>
+
+	<body>
+    <h1>Snippets</h1>
+		<div class="snippets">
+			<% for (let {imageURL, code} of snippets) { %>
+				<div class="pair">
+          <img class="image" src="<%= imageURL %>" />
+					<pre class="code"><%= code.trim() %></pre>
+				</div>
+			<% } %>
+		</div>
+	</body>
+
+</html>

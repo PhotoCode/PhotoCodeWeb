@@ -12,9 +12,10 @@ HACKEREARTH_SECRET: secret key for code api
 IMGBB_SECRET: secret key for image api
 */
 
-// app setup
+// initial setup
 const app = express();
 const upload = multer();
+const snippets = [];
 
 // google cloud setup
 const options = JSON.parse(process.env.GOOGLE_SECRET);
@@ -26,7 +27,8 @@ const HACKEREARTH_SECRET = process.env.HACKEREARTH_SECRET;
 const IMGBB_UPLOAD = "https://api.imgbb.com/1/upload";
 const IMGBB_SECRET = process.env.IMGBB_SECRET;
 
-// middleware
+// more app setup
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -66,14 +68,20 @@ app.post("/run", async (req, res) => {
   }
 });
 
-// scan, upload, and return image info
+app.get("/snippets", (req, res) => {
+	res.render("snippets.ejs", {snippets});
+});
+
+// scan, upload, add to snippets, and return image info
 // file: image
 app.post("/scan", upload.single("image"), async (req, res) => {
 	const buffer = req.file.buffer;
 	try {
 		const imageURL = await uploadImage(buffer);
 		const code = await scanImage(buffer);
-		return res.json({imageURL, code});
+		const pair = {imageURL, code};
+		snippets.push(pair);
+		return res.json(pair);
 	} catch (error) {
 		if (error.response) return res.json(error.response.data);
 		return res.json(error);
