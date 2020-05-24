@@ -2,6 +2,7 @@ const express = require('express');
 const multer  = require('multer');
 const vision = require('@google-cloud/vision');
 const axios = require('axios');
+const qs = require("querystring");
 
 const upload = multer();
 const app = express();
@@ -24,9 +25,13 @@ app.post('/run', async (req, res) => {
 	};
 
 	try {
-		const response = await axios.post(HACKEREARTH_RUN, data);
+		const stringified = qs.stringify(data);
+		const response = await axios.post(HACKEREARTH_RUN, stringified);
+
+		let message, errors;
+		const result = {message, errors} = response.data;
 		if (response.message == "OK")
-			result.output = response.run_status.output;
+			result.output = response.data.run_status.output;
 		return res.json(result);
 	}
 
