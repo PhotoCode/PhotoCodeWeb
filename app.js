@@ -21,15 +21,16 @@ app.post('/run', async (req, res) => {
 		"lang": "JAVASCRIPT"
 	};
 	try {
-    const response = await axios.post(HACKEREARTH_RUN, config);
-    const {message, errors, run_status: {output}} = response;
-		const result = {"output": output, "message": message, "errors": errors};
-    res.json(result);
-  } catch (error) {
-		console.log(error);
-		const result = {"errors": {[response.data.message]: error}};
-    res.json(result);
-  }
+		const response = await axios.post(HACKEREARTH_RUN, config);
+		if (response.message == "OK")
+			result.output = response.run_status.output;
+		res.json(result);
+	} catch (error) {
+		if (error.response)
+			res.json(error.response.data);
+		console.log("Error", error.message);
+		res.json(error);
+	}
 });
 
 app.post('/scan', upload.single('image'), async (req, res) => {
