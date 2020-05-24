@@ -30,20 +30,24 @@ app.get("/", (req, res) => {
 
 app.post("/run", async (req, res) => {
   console.log("Code:", req.body.code);
-  const data = {
+  const stringifiedData = qs.stringify({
     client_secret: HACKEREARTH_SECRET,
     source: req.body.code,
-    lang: "JAVASCRIPT"
-  };
+    lang: "JAVASCRIPT_NODE"
+  });
 
   try {
-    const stringified = qs.stringify(data);
-    const response = await axios.post(HACKEREARTH_RUN, stringified);
-
-    let message, errors;
-    const result = ({ message, errors } = response.data);
-    if (response.message == "OK")
-      result.output = response.data.run_status.output;
+    const {data} = await axios.post(HACKEREARTH_RUN, stringifiedData);
+    const result = {message: data.message, errors: data.errors};
+    if (data.run_status != null) {
+			const {run_status} = data;
+      result.output = run_status.output;
+			if (run_status.status != "AC") {
+				const {status, status_detail, stderr} = run_status;
+				if (result.errors == null) result.errors = {};
+				result.errors[`${status}: ${status_detail}`] = stderr;
+			}
+		}
     return res.json(result);
   } catch (error) {
     console.log("Error:", error.message);
