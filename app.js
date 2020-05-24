@@ -24,7 +24,6 @@ const app = express();
 const upload = multer();
 const snippets = [];
 
-console.log("it's: " + process.env);
 // google cloud setup
 const options = JSON.parse(process.env.GOOGLE_SECRET);
 const client = new vision.ImageAnnotatorClient(options);
