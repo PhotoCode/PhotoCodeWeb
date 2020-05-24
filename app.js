@@ -2,18 +2,30 @@ const express = require('express');
 const multer  = require('multer');
 const vision = require('@google-cloud/vision');
 const axios = require('axios');
+const path = require("path");
 const qs = require("querystring");
 
-const upload = multer();
 const app = express();
 const client = new vision.ImageAnnotatorClient();
 const HACKEREARTH_RUN = "https://api.hackerearth.com/v3/code/run/";
 const HACKEREARTH_SECRET = process.env.HACKEREARTH_SECRET;
 
-app.use(express.json());
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now());
+  }
+});
 
-app.get('/', (req, res) => {
-	res.send(__dirname);
+const upload = multer({ storage: storage });
+
+app.use(express.json());
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.post('/run', async (req, res) => {
@@ -43,12 +55,13 @@ app.post('/run', async (req, res) => {
 	}
 });
 
-app.post('/scan', upload.single('image'), (req, res) => {
-	const encoded = req.file.buffer.toString('base64')
-	client.documentTextDetection(encoded)
-		.then( result => {
-			res.json({text: result.fullTextAnnotation.text});
-		}) .catch(err => console.log(err));
+app.post("/scan", upload.single("image"), (req, res) => {
+  client
+    .documentTextDetection(path.join(__dirname, req.file.path))
+    .then(result => {
+      res.json({ result });
+    })
+    .catch(err => console.log(err));
 });
 
 app.listen(process.env.PORT || 3000, _ => console.log("App started"));
